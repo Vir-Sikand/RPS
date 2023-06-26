@@ -1,3 +1,41 @@
+var buttons = Array.from(document.querySelectorAll('button'))
+var output = document.querySelector('#score')
+var winOut = document.querySelector('#winner')
+console.log(buttons)
+var you = 0
+var computer = 0
+buttons.forEach(function(button) {
+    button.addEventListener('click', userRound);
+});
+
+function userRound(e) {
+        var playerSelection = this.value
+        var computerSelection = getComputerChoice()
+        result = playRound(playerSelection, computerSelection)
+        if (result == 1) {
+            you += 1
+        } else if (result == -1) {
+            computer += 1
+        }
+        var displayText = "Your Score: " + you + " Computer Score: " + computer;
+        output.textContent = displayText;
+        var tempContent = ""
+        if (you == 5) {
+            tempContent = "You were first to 5"
+            winOut.textContent = tempContent
+            you = 0
+            computer = 0
+        } else if (computer == 5) {
+            tempContent = "Computer was first to 5"
+            winOut.textContent = tempContent
+            you = 0
+            computer = 0
+        }
+        setTimeout(function() {
+            winOut.textContent = "";
+          }, 10000);
+        
+}
 
 function getComputerChoice() {
     let randomInteger = Math.floor(Math.random() * 3)
@@ -41,6 +79,8 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
+
+/*
 function game() {
     let score = 0
     for(i = 0; i < 5; i++) {
@@ -59,3 +99,4 @@ function game() {
 }
 
 game();
+*/
