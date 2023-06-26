@@ -11,13 +11,15 @@ buttons.forEach(function(button) {
 function userRound(e) {
         var playerSelection = this.value
         var computerSelection = getComputerChoice()
-        result = playRound(playerSelection, computerSelection)
+        returned = playRound(playerSelection, computerSelection)
+        result = returned[0]
+        text = returned[1]
         if (result == 1) {
             you += 1
         } else if (result == -1) {
             computer += 1
         }
-        var displayText = "Your Score: " + you + " Computer Score: " + computer;
+        var displayText = text + " Your Score: " + you + " Computer Score: " + computer;
         output.textContent = displayText;
         var tempContent = ""
         if (you == 5) {
@@ -33,7 +35,7 @@ function userRound(e) {
         }
         setTimeout(function() {
             winOut.textContent = "";
-          }, 10000);
+          }, 6000);
         
 }
 
@@ -51,30 +53,30 @@ function getComputerChoice() {
 function playRound(playerSelection, computerSelection) {
     if (playerSelection == computerSelection) {
         console.log("It's a tie, you both chose " + playerSelection)
-        return 0
+        return [0, "It's a tie, you both chose " + playerSelection]
     } else if (playerSelection == "PAPER") {
         if (computerSelection == "ROCK") {
             console.log("You win, PAPER beats ROCK")
-            return 1
+            return [1, "You win, PAPER beats ROCK"]
         } else {
             console.log("You lose, PAPER loses to SCISSORS")
-            return -1
+            return [-1, "You lose, PAPER loses to SCISSORS"]
         }
     } else if (playerSelection == "SCISSORS") {
         if (computerSelection == "PAPER") {
             console.log("You win, SCISSORS beats PAPER")
-            return 1
+            return [1, "You win, SCISSORS beats PAPER"]
         } else {
             console.log("You lose, SCISSORS loses to ROCK")
-            return -1
+            return [-1, "You lose, SCISSORS loses to ROCK"]
         }
     } else {
         if (computerSelection == "SCISSORS") {
             console.log("You win, ROCK beats Scissors")
-            return 1
+            return [1, "You win, ROCK beats Scissors"]
         } else {
             console.log("You lose, ROCK loses to PAPER")
-            return -1
+            return [-1, "You lose, ROCK loses to PAPER"]
         }
     }
 }
